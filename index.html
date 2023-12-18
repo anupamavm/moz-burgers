@@ -5,11 +5,151 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
 		<link rel="stylesheet" href="./style.css" />
+
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+			crossorigin="anonymous"
+		/>
 	</head>
 	<body>
-		<div id="app"></div>
-		<script src="./app.js"></script>
+		<script src="./scripts/components/foodCard.js"></script>
 
-		<div id="content"></div>
+		<!-- <ul>
+			<li><a onclick="home()" id="home" href="#home">Home</a></li>
+			<li><a onclick="about()" id="about" href="#about">About</a></li>
+		</ul> -->
+
+		<style>
+			body {
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				border: 1px solid red;
+			}
+
+			.mainNavBar {
+				display: flex;
+				flex-direction: column;
+				/* justify-content: center; */
+				align-items: center;
+				height: 100vh;
+				width: 70px;
+				gap: 10%;
+				border: 1px solid red;
+			}
+
+			.app {
+				height: 100vh;
+				width: 100%;
+			}
+		</style>
+
+		<div class="mainNavBar">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+				onclick="home()"
+			>
+				<rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
+				<g fill="none" stroke="currentColor" stroke-width="1.5">
+					<path d="M3 10v9a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-9" />
+					<path
+						stroke-miterlimit="16"
+						d="M14.833 21v-6a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v6"
+					/>
+					<path
+						d="m21.818 9.364l-1.694-5.929A.6.6 0 0 0 19.547 3H15.5l.475 5.704a.578.578 0 0 0 .278.45c.39.233 1.152.663 1.747.846c1.016.313 2.5.2 3.346.096a.57.57 0 0 0 .472-.732Z"
+					/>
+					<path
+						d="M14 10c.568-.175 1.288-.574 1.69-.812a.578.578 0 0 0 .28-.549L15.5 3h-7l-.47 5.639a.578.578 0 0 0 .28.55c.402.237 1.122.636 1.69.811c1.493.46 2.507.46 4 0Z"
+					/>
+					<path
+						d="m3.876 3.435l-1.694 5.93a.57.57 0 0 0 .472.73c.845.105 2.33.217 3.346-.095c.595-.183 1.358-.613 1.747-.845a.578.578 0 0 0 .278-.451L8.5 3H4.453a.6.6 0 0 0-.577.435Z"
+					/>
+				</g>
+			</svg>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+				onclick="food()"
+			>
+				<rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
+				<g
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+				>
+					<path
+						d="m15 15l3.379-3.379a2.121 2.121 0 0 1 1.5-.621H20a2 2 0 0 1 2 2v0a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v0a2 2 0 0 1 2-2h4.515a6 6 0 0 1 4.242 1.757zM3 15h18v2a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3z"
+					/>
+					<path
+						d="M12 4c-4.623 0-8.432 1.756-8.942 6c-.066.55.39 1 .942 1h16c.552 0 1.008-.45.942-1c-.51-4.244-4.319-6-8.942-6M7.001 8H7m5.002 0"
+					/>
+				</g>
+			</svg>
+
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+			>
+				<rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
+				<g fill="none" stroke="currentColor" stroke-width="1.5">
+					<circle cx="12" cy="6" r="4" />
+					<path
+						d="M20 17.5c0 2.485 0 4.5-8 4.5s-8-2.015-8-4.5S7.582 13 12 13s8 2.015 8 4.5Z"
+					/>
+				</g>
+			</svg>
+
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+			>
+				<rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
+				<path
+					fill="currentColor"
+					d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093M16.586 8H14V5.414zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10z"
+				/>
+				<path fill="currentColor" d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z" />
+			</svg>
+
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+			>
+				<rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
+				<g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
+					<path
+						d="M22.775 8A9 9 0 0 1 23 10h-9V1a9 9 0 0 1 8.775 7m-2.067 0A6.999 6.999 0 0 0 16 3.292V8z"
+					/>
+					<path
+						d="M1 14a9 9 0 0 1 11-8.775V12h6.775A9 9 0 1 1 1 14m15.804 0H10V7.196A6.804 6.804 0 1 0 16.804 14"
+					/>
+				</g>
+			</svg>
+		</div>
+
+		<div class="app" style="border: 1px solid red; height: 100px"></div>
+
+		<script src="./scripts/app.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+			crossorigin="anonymous"
+		></script>
 	</body>
 </html>

@@ -1,19 +1,30 @@
-const routes = {
-	'#/': 'home-component',
-	'#/fooditems': 'fooditems-component',
-	'#/clients': 'clients-component',
-	'#/orders': 'orders-component',
-	'#/reports': 'reports-component',
+'use strict';
+
+const app = document.getElementById('app');
+const mainNavBar = document.getElementsByClassName('mainNavBar');
+
+const fetchHtml = async (file) => {
+	try {
+		const response = await fetch(file);
+		if (!response.ok) {
+			throw new Error(`Failed to fetch HTML: ${response.status}`);
+		}
+		return await response.text();
+	} catch (error) {
+		console.error(error);
+	}
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-	// Create an instance of LayoutComponent and pass the routes object
-	const layoutComponent = new LayoutComponent(routes);
-	document.getElementById('app').appendChild(layoutComponent);
+const home = async () => {
+	const htmlContent = await fetchHtml('home.html');
+	app.innerHTML = htmlContent;
+};
+const food = async () => {
+	const htmlContent = await fetchHtml('food.html');
+	app.innerHTML = htmlContent;
+};
 
-	window.addEventListener('hashchange', () => {
-		layoutComponent.navigateTo(window.location.hash);
-	});
-
-	layoutComponent.navigateTo(window.location.hash || '#/');
-});
+const about = async () => {
+	const htmlContent = await fetchHtml('about.html');
+	app.innerHTML = htmlContent;
+};

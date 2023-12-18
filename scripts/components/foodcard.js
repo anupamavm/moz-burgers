@@ -1,31 +1,49 @@
-const template = document.createElement('template');
-template.innerHTML = `
-
-<style>
-.root, .root * {
- 
-    }
-.root {
-    background:  #eeeeee;
-    border-radius: 20px;
-    width: 166px;
-    height: 284px;
-    position: relative;
-    }
-
-</style>
-
-<div class="root" >
-</div>
-
-`;
-
 class FoodCard extends HTMLElement {
-	constructor() {
+	constructor(routes) {
 		super();
-		const shadow = this.attachShadow({ mode: 'open' });
-		shadow.append(template.content.cloneNode(true));
+		this.routes = routes;
+	}
+
+	connectedCallback() {
+		this.attachShadow({ mode: 'open' });
+		this.shadowRoot.innerHTML = `
+		<style>
+			/* Add your layout-specific styles here */
+			/* Use Bootstrap classes here */
+			.navbar {
+				background-color: #e3f2fd;
+			}
+
+			.navbar h1 {
+				color: #2196f3;
+			}
+
+			.content-container {
+				padding: 20px;
+			}
+		</style>
+		<nav class="navbar">
+			<h1>Food Card</h1>
+		</nav>
+		<div class="content-container" id="content"></div>
+	`;
+		// Continue with your event listeners and navigation logic
+	}
+
+	navigateTo(route) {
+		window.location.hash = route;
+		this.renderContent(route);
+	}
+
+	renderContent(route) {
+		const contentContainer = this.shadowRoot.getElementById('content');
+		contentContainer.innerHTML = ''; // Clear previous content
+
+		const componentName = this.routes[route] || 'not-found-component';
+		const component = document.createElement(componentName);
+		contentContainer.appendChild(component);
 	}
 }
 
-window.customElements.define('food-card', FoodCard);
+// Use 'food-card' instead of 'foodCard' in customElements.define
+customElements.define('food-card', FoodCard);
